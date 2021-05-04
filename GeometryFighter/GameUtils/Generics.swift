@@ -22,7 +22,7 @@
 
 import Foundation
 
-public func arc4random <T: IntegerLiteralConvertible> (type: T.Type) -> T
+public func arc4random <T: ExpressibleByIntegerLiteral> (type: T.Type) -> T
 {
     var r: T = 0
     arc4random_buf(&r, Int(MemoryLayout<T>.size))

@@ -32,7 +32,7 @@ class GameViewController: UIViewController {
     
     @objc func setupView()
     {
-        scnView = self.view as! SCNView
+        scnView = (self.view as! SCNView)
         scnView.autoenablesDefaultLighting = true
         scnView.delegate = self
         scnView.isPlaying = true
@@ -119,7 +119,7 @@ class GameViewController: UIViewController {
     @objc func createTrail(color: UIColor, geometry: SCNGeometry) -> SCNParticleSystem
     {
         let trail = SCNParticleSystem(named: "Trail.scnp", inDirectory: nil)!
-        trail.particleColor = color
+        trail.particleColor = color.withAlphaComponent(0.5)
         trail.emitterShape = geometry
         return trail
     }
@@ -204,6 +204,7 @@ class GameViewController: UIViewController {
         let explosion =
             SCNParticleSystem(named: "Explode.scnp", inDirectory:
                 nil)!
+        
         explosion.emitterShape = geometry
         explosion.birthLocation = .surface
         let rotationMatrix =
@@ -247,7 +248,7 @@ class GameViewController: UIViewController {
             {
                 handleBadCollision()
             }
-            createExplosion(geometry: result.node.geometry!, position: result.node.presentation.position, rotation: result.node.presentation.rotation)
+           // createExplosion(geometry: result.node.geometry!, position: result.node.presentation.position, rotation: result.node.presentation.rotation)
             result.node.removeFromParentNode()
         }
     }
